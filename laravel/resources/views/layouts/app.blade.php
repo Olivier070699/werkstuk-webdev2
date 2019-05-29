@@ -51,6 +51,8 @@
                                 </li>
                             @endif
                         @else
+                            <li><a class="nav-link" href="{{ url('/home') }}" role="button">Home</a></li>
+                            <li><a class="nav-link" href="{{ url('/profile') }}" role="button">Profile</a></li>
                             <li><a class="nav-link" href="{{ url('/projects') }}" role="button">Projects</a></li>
                             <li><a class="nav-link" href="{{ url('/projects/create') }}" role="button">Create</a></li>
                             
@@ -61,12 +63,9 @@
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
 
-                                    <a class="dropdown-item" href="{{ url('/profile') }}" role="button">Profile</a> 
-
                                     <a class="dropdown-item" href="{{ url('stripe') }}" role="button">Credits: {{ \Auth::user()->credits }}</a>
-
+                                    <a class="dropdown-item" href="{{ url('/gifts') }}" role="button">Gifts</a>
                                     <a class="dropdown-item" href="{{ url('/privacy') }}" role="button">Privacy Policy</a> 
-
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

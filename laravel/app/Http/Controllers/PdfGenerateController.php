@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests;
 use Illuminate\Http\Request;
+use App\Sponsor;
+use App\Project;
+
 use DB;
 use PDF;
 
@@ -14,19 +17,11 @@ class PdfGenerateController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function pdfview(Request $request)
+    public function pdfview($project_id)
     {
-        $users = DB::table("users")->get();
-        view()->share('users',$users);
+        $project = Project::where('id', $project_id)->first();
 
-        if($request->has('download')){
-        	// Set extra option
-        	PDF::setOptions(['dpi' => 150, 'defaultFont' => 'sans-serif']);
-        	// pass view file
-            $pdf = PDF::loadView('pdfview');
-            // download pdf
-            return $pdf->download('pdfview.pdf');
-        }
-        return view('pdfview');
+        $pdf = PDF::loadView('pdfview', array('project' => $project));
+        return $pdf->download($project->title.'.pdf');
     }
 }

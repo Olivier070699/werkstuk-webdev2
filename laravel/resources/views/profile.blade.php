@@ -6,13 +6,13 @@
         <div class="row justify-content-center">
             <div class="col-md-8"><div class="card">
                 @if(Auth::user())
-                
+
                 <div class="card-body">
                     <h2>Your Projects</h2>
                         @foreach ($projects as $project)
                             @if(\Auth::user()->id == $project->user)
                                 <li>
-                                    <a href="/projects/{{ $project->id }}">{{ $project->title }}</a>
+                                    <a href="/projects/{{ $project->id }}">{{ $project->title }}</a><br>
                                 </li>
                             @endif
                         @endforeach
@@ -28,9 +28,10 @@
                     @foreach($sponsors as $sponsor)
                         @if(\Auth::user()->id == $sponsor->user_id)
                         <ul>
-                            <li>name: <a href="/projects/{{ $sponsor->project_id }}">{{ $sponsor->project_id }}</a></li>
+                            <li>name: </li>
                             <li>amount: {{ $sponsor->credits }}</li>
                             <li>date: {{ $sponsor->created_at }}</li>
+                            <li><a href="/projects/{{ $sponsor->project_id }}">View project</a></li>
                         </ul>
                         @endif
                     @endforeach

@@ -8,6 +8,8 @@ use App\Project;
 use App\User;
 use App\Sponsor;
 use App\Comment;
+use App\NewsOverview;
+use App\Gift;
 
 class ProjectsController extends Controller
 {
@@ -98,6 +100,32 @@ class ProjectsController extends Controller
             User::where('id', \Auth::user()->id)->update([
                 'credits' => $newUserCredits
             ]);
+
+            $admin = User::where('id',2)->first();
+            $adminCredits = $funded * 0.1;
+            $newAdminCredits = $admin->credits + $adminCredits;
+            User::where('id', $admin->id)->update([
+                'credits' => $newAdminCredits
+            ]);
+            
+            // Cadeau
+            if($funded >= 200 && $funded < 500){
+                $gift = new Gift();
+                $gift->user_id = \Auth::user()->id;
+                $gift->gift = 'Badeendje';
+                $gift->save();
+            }elseif($funded >= 500 && $funded < 700){
+                $gift = new Gift();
+                $gift->user_id = \Auth::user()->id;
+                $gift->gift = 'Vip tafel';
+                $gift->save();
+            }elseif($funded >= 700){
+                $gift = new Gift();
+                $gift->user_id = \Auth::user()->id;
+                $gift->gift = 'Vip tafel & 2 stukken chocolade';
+                $gift->save();
+            }
+
         }else {
             session()->flash("notif", "You don't have enough credits");
         }
@@ -119,6 +147,35 @@ class ProjectsController extends Controller
         $comment->comment = request('comment');
 
         $comment->save();
+
+        return redirect('/projects/' . $id);
+    }
+
+    public function addNewsView($id){
+        $project = Project::where('id',$id)->first();
+        if (500 <= \Auth::user()->credits) {
+        $news = new NewsOverview();
+        $news->project_id = $id;
+        $news->title = $project->title;
+        $news->intro = $project->intro;
+
+        $news->save();
+
+        $cost = 500;
+
+        $newUserCredits = \Auth::user()->credits - $cost;
+        User::where('id', \Auth::user()->id)->update([
+            'credits' => $newUserCredits
+        ]);
+
+        $admin = User::where('id',2)->first();
+        $newAdminCredits = $admin->credits + $cost;
+        User::where('id', $admin->id)->update([
+            'credits' => $newAdminCredits
+        ]);
+        }else {
+            session()->flash("notif", "You must have at least 500 credits");
+        }
 
         return redirect('/projects/' . $id);
     }

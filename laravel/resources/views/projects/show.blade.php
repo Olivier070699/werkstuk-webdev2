@@ -30,20 +30,29 @@
                     @if(Auth::user())
                         @if(\Auth::user()->id == $project->user || Auth::user()->id == 2)
                             <a href="/projects/{{ $project->id }}/edit">Edit</a>
-                        @else
-                            <p>Project owner: <b>{{ $creator->name }}</b></p>
-
-                            <form method="POST" action="/projects/{{ $project->id }}/addCredits">
+                            
+                            <form method="POST" action="/projects/{{ $project->id }}/addNewsView">
                                 {{ csrf_field() }}
-                                <input type="number" name="numberOfCredits" placeholder="credits" min="1">
-                                <button>Sponsor credits</button>
+                                <button>add to news overview</button>
                             </form>
+
+                        @else
+                            @if($project->credits <= $sponsor)
+                                <p>Het aantal credits werd reeds behaald</p>
+                            @else
+                                <form method="POST" action="/projects/{{ $project->id }}/addCredits">
+                                    {{ csrf_field() }}
+                                    <input type="number" name="numberOfCredits" placeholder="credits" min="1">
+                                    <button>Sponsor credits</button>
+                                </form>
+                            @endif
+                            <p>Project owner: <b>{{ $creator->name }}</b></p>
                         @endif
                     @else
                         <p>Project owner: <b>{{ $creator->name }}</b></p>  
                     @endif
 
-                    <a href="#">Download pdf</a>
+                    <a href="{{route('generate-pdf',$project->id)}}">Download pdf</a>
                     
                     @if(Auth::user())
                         @if(\Auth::user()->id !== $project->user)

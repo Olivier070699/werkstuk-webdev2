@@ -47,6 +47,12 @@ Route::POST('/projects/{project}/addCredits', 'ProjectsController@addCredits');
 // ADD COMMENT TO PROJECT
 Route::POST('/projects/{project}/addComment', 'ProjectsController@addComment');
 
+// ADD TO NEWVIEW
+Route::POST('/projects/{project}/addNewsView', 'ProjectsController@addNewsView');
+
 // PDF
-Route::get('generate-pdf', 'PdfGenerateController@pdfview')->name('generate-pdf');
+Route::get('generate-pdf/{project_id}', 'PdfGenerateController@pdfview')->name('generate-pdf');
+
+// GIFTS
+Route::get('/gifts', 'GiftsController@gifts')->name('gifts');
 
