@@ -15,6 +15,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+// MAIL
 Route::get('/sendtestmail', 'MailTestController@sendMail');
 Auth::routes();
 
@@ -50,8 +51,13 @@ Route::POST('/projects/{project}/addComment', 'ProjectsController@addComment');
 // ADD TO NEWVIEW
 Route::POST('/projects/{project}/addNewsView', 'ProjectsController@addNewsView');
 
-// PDF
+// PDF PROJECT
 Route::get('generate-pdf/{project_id}', 'PdfGenerateController@pdfview')->name('generate-pdf');
+// PDF SPONSORD
+Route::get('generate-sponsor-pdf', 'PdfGenerateController@sponsorpdfview')->name('generate-sponsor-pdf');
+// PDF SEE YOUR SPONSORS
+Route::get('yoursponsors/{project_id}', 'PdfGenerateController@seeyoursponsorpdfview')->name('yoursponsors');
+
 
 // GIFTS
 Route::get('/gifts', 'GiftsController@gifts')->name('gifts');

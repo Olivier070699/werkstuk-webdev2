@@ -24,4 +24,22 @@ class PdfGenerateController extends Controller
         $pdf = PDF::loadView('pdfview', array('project' => $project));
         return $pdf->download($project->title.'.pdf');
     }
+
+    public function sponsorpdfview()
+    {
+        $sponsors = Sponsor::all()->where('user_id', \Auth::user()->id);
+        // dd($sponsors);
+
+        $pdf = PDF::loadView('generate-sponsor-pdf', array('sponsors' => $sponsors));
+        return $pdf->download(\Auth::user()->name . '_sponserd.pdf');
+    }
+
+    public function seeyoursponsorpdfview($project_id)
+    {
+        $sponsors = Sponsor::all()->where('project_id', $project_id);
+        // dd($sponsors);
+
+        $pdf = PDF::loadView('yoursponsors', array('sponsors' => $sponsors));
+        return $pdf->download('Your_sponsors.pdf');
+    }
 }

@@ -25,7 +25,8 @@
 
                 <div class="card-body">
                     <h2>You sponserd</h2>
-                    @foreach($sponsors as $sponsor)
+                    <a href="/generate-sponsor-pdf">Download PDF</a>
+                    <!-- @foreach($sponsors as $sponsor)
                         @if(\Auth::user()->id == $sponsor->user_id)
                         <ul>
                             <li>name: </li>
@@ -34,7 +35,7 @@
                             <li><a href="/projects/{{ $sponsor->project_id }}">View project</a></li>
                         </ul>
                         @endif
-                    @endforeach
+                    @endforeach -->
                 </div>
 
                 @else

@@ -1,0 +1,56 @@
+/* FORM */
+form input, form textarea{
+    width: 100%;
+    padding: 10px 0 10px 10px;
+    margin: 10px 0;
+    border: 1px solid #CED4DA;
+    background-color: white;
+    color: #707070;
+}
+
+.introduction{
+    height: 100px;
+}
+
+form textarea{
+    height: 150px;
+
+}
+
+form button{
+    width: 150px;
+    color: white;
+    background-color: #3490DC;
+    border: none;
+    text-align: center;
+    padding: 10px 0;
+}
+
+form input::placeholder, form textarea::placeholder{
+    color: #CED4DA;
+}
+
+/* DOWLOAD PDF */
+.downloadPdf{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    text-align: right;
+}
+
+.downloadPdf button{
+    width: 175px;
+}
+
+/* DIAGRAM */
+.diagramBack{
+    width:200px; 
+    height: 20px; 
+    background-color: white; 
+    border: solid 1px #707070;
+}
+
+.diagramLoading{
+    background-color: #707070; 
+    height: 20px; max-width: 100%;
+}
