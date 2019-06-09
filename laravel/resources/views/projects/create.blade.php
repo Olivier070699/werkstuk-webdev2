@@ -5,6 +5,7 @@
     <div class="container">
         <div class="card">
             <div class="card-body">
+            @if(Auth::user())
                 <form class="projectForm" method="POST" action="/projects">
 
                     {{ csrf_field() }}
@@ -20,6 +21,9 @@
                         <button type="submit">Create</button>  
 
                 </form>
+            @else
+            <p>You don't have acces to this page.</p>
+             @endif
             </div>
         </div>
     </div>

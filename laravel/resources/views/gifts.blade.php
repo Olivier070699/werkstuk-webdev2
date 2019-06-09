@@ -5,6 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
+            @if(Auth::user())
                 <div class="card-header">Your gifts</div>
                     @foreach ($gifts as $gift)
                         @if(\Auth::user()->id == $gift->user_id)
@@ -13,6 +14,9 @@
                         @endif
                     @endforeach
             </div>
+            @else
+            <p>You don't have acces to this page</p>
+            @endif
         </div>
     </div>
 </div>

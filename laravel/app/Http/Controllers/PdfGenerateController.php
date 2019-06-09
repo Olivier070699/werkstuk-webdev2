@@ -6,9 +6,11 @@ use App\Http\Requests;
 use Illuminate\Http\Request;
 use App\Sponsor;
 use App\Project;
+use App\Image;
 
 use DB;
 use PDF;
+
 
 class PdfGenerateController extends Controller
 {

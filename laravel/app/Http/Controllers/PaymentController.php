@@ -11,6 +11,16 @@ class PaymentController extends Controller
 {
     use Traits\ConvertCurrencyTrait;
 
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function getStripeForm() {
       return view('payment');  
     }

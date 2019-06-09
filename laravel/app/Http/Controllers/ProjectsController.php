@@ -11,6 +11,7 @@ use App\Comment;
 use App\NewsOverview;
 use App\Gift;
 use App\Image;
+use Carbon\Carbon;
 
 class ProjectsController extends Controller
 {
@@ -157,6 +158,7 @@ class ProjectsController extends Controller
 
     public function addNewsView($id){
         $project = Project::where('id',$id)->first();
+
         if (500 <= \Auth::user()->credits) {
         $news = new NewsOverview();
         $news->project_id = $id;
@@ -180,6 +182,8 @@ class ProjectsController extends Controller
         }else {
             session()->flash("notif", "You must have at least 500 credits");
         }
+       
+
 
         return redirect('/projects/' . $id);
     }

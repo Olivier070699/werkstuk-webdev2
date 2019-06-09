@@ -42,6 +42,8 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
+                        <li><a class="nav-link" href="{{ url('/home') }}" role="button">Home</a></li>
+                        <li><a class="nav-link" href="{{ url('/projects') }}" role="button">Projects</a></li>
                         @guest
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
@@ -52,9 +54,7 @@
                                 </li>
                             @endif
                         @else
-                            <li><a class="nav-link" href="{{ url('/home') }}" role="button">Home</a></li>
                             <li><a class="nav-link" href="{{ url('/profile') }}" role="button">Profile</a></li>
-                            <li><a class="nav-link" href="{{ url('/projects') }}" role="button">Projects</a></li>
                             <li><a class="nav-link" href="{{ url('/projects/create') }}" role="button">Create</a></li>
                             
                             <li class="nav-item dropdown">

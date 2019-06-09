@@ -6,18 +6,11 @@ use Illuminate\Http\Request;
 use App\Project;
 use App\Sponsor;
 use App\NewsOverview;
+use Carbon\Carbon;
 
 class HomeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+
 
     /**
      * Show the application dashboard.
@@ -27,8 +20,11 @@ class HomeController extends Controller
     public function index()
     {   
         $overViews = NewsOverview::all();
+        $tomorrow = Carbon::tomorrow();
+        $yesterday = Carbon::yesterday();
+        
 
-        return view('home', compact('overViews'));
+        return view('home', compact('overViews', 'yesterday', 'tomorrow'));
     }
 
     public function privacy(){

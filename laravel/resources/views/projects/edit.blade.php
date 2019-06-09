@@ -30,10 +30,10 @@
                             <button type="submit">Delete project</button>
                     </form>
                             @else
-                                <p>U heeft geen toegang tot deze pagina.</b></p>
+                                <p>You don't have acces to this page.</b></p>
                             @endif
                         @else
-                            <p>U heeft geen toegang tot deze pagina.</p>  
+                            <p>You don't have acces to this page.</p>  
                         @endif
             </div>
         </div>
