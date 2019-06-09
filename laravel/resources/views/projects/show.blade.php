@@ -3,6 +3,16 @@
 @section('content')
 <main class="py-4">
     <div class="container">
+    @if (session('fail'))
+        <div class="alert alert-danger col-lg-10">
+            {{ session('fail') }}
+        </div>
+        @endif
+        @if (session('succes'))
+        <div class="alert alert-success col-lg-10">
+            {{ session('succes') }}
+        </div>
+    @endif
         <div class="card">
             <div class="card-body">  
                 @if (Session::has('notif'))
@@ -26,6 +36,11 @@
                     <div class="diagramLoading" style="width: {{ $sponsor / $project->credits *100}}%;"></div>
                 </div>
                 
+                <div class="imageContainer">
+                    @foreach ($images as $image)
+                        <img src="{{ asset($image->filepath . '/' . $image->filename) }}">
+                    @endforeach 
+                </div>
 
                 <div class="downloadPdf">
                     <a href="{{route('generate-pdf',$project->id)}}">Download pdf</a>
@@ -40,12 +55,34 @@
                         </form>
                 </div>
 
+                <form action="{{ route('store', $project->id) }}" method="post" enctype="multipart/form-data" class="uploadImageForm">
+                        @csrf
+                        <div class="field">
+                            <div class="control">
+                                <input class="form-control" type="text" name="project_id"
+                                    value="{{$project->id}}" hidden>
+                            </div>
+                        </div>
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <input type="file" name="file[]" id="file" multiple>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <button type="submit" class="button">
+                            upload image
+                        </button><br>
+                    </form>
+
                     @else
                     </div>
                         @if($project->credits <= $sponsor)
                             <p>Het aantal credits werd reeds behaald</p>
                         @else
-                            <form method="POST" action="/projects/{{ $project->id }}/addCredits">
+                            <form class="fundInput" method="POST" action="/projects/{{ $project->id }}/addCredits">
                                 {{ csrf_field() }}
                                 <input type="number" name="numberOfCredits" placeholder="credits" min="1">
                                 <button>Sponsor credits</button>
@@ -54,12 +91,13 @@
                         <p>Project owner: <b>{{ $creator->name }}</b></p>
                     @endif
                 @else
+                    </div>
                     <p>Project owner: <b>{{ $creator->name }}</b></p>  
                 @endif
                 
                 @if(Auth::user())
                     @if(\Auth::user()->id !== $project->user)
-                    <form method="POST" action="/projects/{{ $project->id }}/addComment">
+                    <form class="postComment" method="POST" action="/projects/{{ $project->id }}/addComment">
                         {{ csrf_field() }}
                         <textarea name="comment" placeholder="Post a comment"></textarea>
                         <button>Post</button>

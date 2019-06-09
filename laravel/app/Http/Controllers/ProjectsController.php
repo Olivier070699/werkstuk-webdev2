@@ -10,13 +10,15 @@ use App\Sponsor;
 use App\Comment;
 use App\NewsOverview;
 use App\Gift;
+use App\Image;
 
 class ProjectsController extends Controller
 {
     public function index()
     {
         $projects = Project::all();
-        return view('projects.index', compact('projects'));
+        $images = Image::all();
+        return view('projects.index', compact('projects', 'images'));
     }
 
 
@@ -26,10 +28,11 @@ class ProjectsController extends Controller
         $creator = User::where('id', $project->user)->first();
         $sponsor = Sponsor::where('project_id', $id)->sum('credits');
         $comments = Comment::all()->where('project_id', $id);
+        $images = Image::all()->where('project_id', $id);
 
         
 
-        return view('projects.show', compact('project', 'creator', 'sponsor', 'comments'));
+        return view('projects.show', compact('project', 'creator', 'sponsor', 'comments', 'images'));
         
     }
 
@@ -82,6 +85,7 @@ class ProjectsController extends Controller
     public function destroy($id)
     {
         Project::find($id)->delete();
+        NewsOverview::where('project_id', $id)->delete();
 
         return redirect('/projects');
     }

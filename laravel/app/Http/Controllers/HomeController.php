@@ -27,6 +27,7 @@ class HomeController extends Controller
     public function index()
     {   
         $overViews = NewsOverview::all();
+
         return view('home', compact('overViews'));
     }
 

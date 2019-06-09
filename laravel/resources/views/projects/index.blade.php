@@ -1,19 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
-@foreach ($projects as $project)
-<main class="py-4">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8"><div class="card">
-                <div class="card-body">
-                    <li>
-                        <a href="/projects/{{ $project->id }}">{{ $project->title }}</a>
-                    </li>
+    
+        <div class="projectContainer">
+            @foreach ($projects as $project)
+                <div class="project">
+                    <div>
+                        <h1><a href="/projects/{{ $project->id }}">{{ $project->title }}</a></h1>
+                    </div>
                 </div>
-            </div>
+            @endforeach
         </div>
-    </div>
-</main>
-@endforeach
 @endsection

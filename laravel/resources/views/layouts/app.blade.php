@@ -20,7 +20,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 
-    
+    @yield('head')
 </head>
 <body>
     <div id="app">
@@ -88,5 +88,6 @@
             @yield('content')
         </main>
     </div>
+    @yield('footer')
 </body>
 </html>

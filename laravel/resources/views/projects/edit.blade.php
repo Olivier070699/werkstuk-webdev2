@@ -8,7 +8,7 @@
                     @if(Auth::user())
                             @if(\Auth::user()->id == $project->user || Auth::user()->id == 2)
 
-                    <form method="POST" action="/projects/{{ $project->id }}">
+                    <form class="projectForm" method="POST" action="/projects/{{ $project->id }}">
 
                     @method('PATCH')
                     @csrf
@@ -24,7 +24,7 @@
                         <button type="submit">Update project</button> 
                     </form>
 
-                    <form method="POST" action="/projects/{{ $project->id }}">
+                    <form class="projectForm delete" method="POST" action="/projects/{{ $project->id }}">
                             @method('DELETE')
                             @csrf
                             <button type="submit">Delete project</button>

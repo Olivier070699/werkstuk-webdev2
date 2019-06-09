@@ -62,3 +62,6 @@ Route::get('yoursponsors/{project_id}', 'PdfGenerateController@seeyoursponsorpdf
 // GIFTS
 Route::get('/gifts', 'GiftsController@gifts')->name('gifts');
 
+// IMG
+Route::post('/projects/{project}/upload', 'ImageUploadController@store')->name('store');
+
