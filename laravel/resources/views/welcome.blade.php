@@ -83,6 +83,7 @@
                 <div class="title m-b-md">
                     GIFT OUT
                 </div>
+                <p>Upload. Get Sponsored. Be Successful.</p>
             </div>
         </div>
     </body>

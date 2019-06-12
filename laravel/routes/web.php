@@ -16,7 +16,7 @@ Route::get('/', function () {
 });
 
 // MAIL
-Route::get('/sendtestmail', 'MailTestController@sendMail');
+// Route::get('/sendtestmail', 'MailTestController@sendMail');
 Auth::routes();
 
 // HOME - PRIVACY - PROFILE

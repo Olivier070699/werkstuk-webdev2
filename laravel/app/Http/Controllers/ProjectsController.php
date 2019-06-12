@@ -158,16 +158,15 @@ class ProjectsController extends Controller
 
     public function addNewsView($id){
         $project = Project::where('id',$id)->first();
+        $cost = 500;
 
-        if (500 <= \Auth::user()->credits) {
+        if ($cost <= \Auth::user()->credits) {
         $news = new NewsOverview();
         $news->project_id = $id;
         $news->title = $project->title;
         $news->intro = $project->intro;
 
         $news->save();
-
-        $cost = 500;
 
         $newUserCredits = \Auth::user()->credits - $cost;
         User::where('id', \Auth::user()->id)->update([
